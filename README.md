@@ -1,1 +1,1 @@
-# BR_Wordle
+# Type Fast

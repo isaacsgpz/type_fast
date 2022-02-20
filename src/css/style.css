@@ -1,0 +1,50 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.root {
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--backgroun-color);
+}
+
+.game-container {
+	width: 100%;
+	max-width: 900px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.game__header,
+.game__footer {
+	width: 100%;
+	position: fixed;
+	text-align: center;
+} 
+
+.game__header {
+	inset: 20px 0 auto 0;
+}
+
+.game__title {
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.text-link {
+	color: var(--main-color);
+	text-decoration: underline;
+}
+
+.game__footer {
+	inset: auto 0 20px 0;
+}
+
+.footer__copyright {
+	font-size: 1.5rem;
+}
+
+
