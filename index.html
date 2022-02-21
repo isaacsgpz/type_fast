@@ -15,25 +15,45 @@
   </head>
   <body>
     <div class="root">
+      <header class="header">
+        <h1 class="header__title">Type Fast</h1>
+      </header>
       <main class="game-container">
-        <header class="game__header">
-          <h1 class="game__title">Type Fast</h1>
-        </header>
+        <div class="game__header">
 
-				<footer class="game__footer">
-          <p class="footer__copyright">
-            &copy;             <a
-						href="https://eoisaac.github.io/My_Links/"
-						target="_blank"
-						class="text-link"
-						>Isaac</a
-					> | <span data-js="copyright-year">:D</span>
-          </p>
+          <div class="game__status">
+            Pontuação:
+            <span class="status__value">00</span>
+          </div>
+
+          <div class="game__status">
+            Tempo:
+            <span class="status__value">00</span>
+          </div>
+
         </div>
-				</footer>
+
+        <div class="game__display">
+          <div>Digite a palavra:</div>
+          <div class="game__word">
+            paralelepipedo
+          </div>
+        </div>
       </main>
+      <footer class="footer">
+        <p class="footer__copyright">
+          &copy;
+          <a
+            href="https://eoisaac.github.io/My_Links/"
+            target="_blank"
+            class="text-link"
+            >Isaac</a
+          >
+          | <span data-js="copyright-year">:D</span>
+        </p>
+      </footer>
     </div>
 
-		<script src="src/js/script.js"></script>
+    <script src="src/js/script.js"></script>
   </body>
 </html>
