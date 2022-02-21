@@ -32,8 +32,12 @@ const interface = {
   word: document.querySelector('[data-js="game-word"]'),
 };
 
+const letters = 'abcdefghijklmnopqrstuvwxyz';
+
 let gameScore = 0;
 let gameIsRunning = false;
+let userTypedWord = [];
+let wordSpansAsArray = [];
 
 const words = [
   'Idade',
@@ -56,10 +60,10 @@ const leftZero = (value) => (value < 10 ? `0${value}` : value);
 
 const getRandomInteger = (min, max) => {
   return Math.round(Math.random() * (max - min) + min);
-}
+};
 
 const homescreenCountdown = () => {
-  let countdownTime = 5;
+  let countdownTime = 2;
   const timer = setInterval(() => {
     interface.countdown.textContent = countdownTime;
     --countdownTime;
@@ -68,7 +72,7 @@ const homescreenCountdown = () => {
       clearInterval(timer);
       toggleHideElements([interface.homescreen]);
       startGame();
-			interface.countdown.textContent = 5;
+      interface.countdown.textContent = 5;
     }
   }, 1000);
 };
@@ -80,34 +84,56 @@ const gameCountdown = (time = 60) => {
 
     if (time === -1) {
       clearInterval(timer);
-      // stopGame();
+      stopGame();
     }
   }, 1000);
 };
 
 const getRandomWords = () => {
-	const randomWord = words[getRandomInteger(0, words.length)];
-	return randomWord.toLowerCase();
+  const randomWord = words[getRandomInteger(0, words.length)];
+  return randomWord.toLowerCase();
 };
+
 
 const displayCurrentWord = () => {
 	let randomWord = getRandomWords();
-	let randomWordAsArray = randomWord.split('');
-	randomWordAsArray.forEach(letter => {
-		const letterSpan = document.createElement('span');
-		letterSpan.classList.add('game__word');
-		letterSpan.textContent = letter;
-		interface.word.appendChild(letterSpan);
-	});
-}
+  let randomWordAsArray = randomWord.split('');
 
+	interface.word.innerHTML = '';
 
+  randomWordAsArray.forEach((letter) => {
+    const letterSpan = document.createElement('span');
+    letterSpan.classList.add('game__word');
+    letterSpan.textContent = letter;
+    interface.word.appendChild(letterSpan);
+  });
 
+	wordSpansAsArray = document.querySelectorAll('.game__word');
+};
+
+window.addEventListener('keydown', (event) => {
+  let pressedKey = event.key;
+
+  if (letters.includes(pressedKey)) {
+		userTypedWord.push(pressedKey);
+
+    wordSpansAsArray.forEach((spanChar, index) => {
+			const userChar = userTypedWord[index];
+
+			if(userChar === spanChar.innerText) {
+				spanChar.classList.add('game__word--correct');
+			} else {
+				spanChar.classList.add('game__word--wrong');
+			}
+    });
+  }
+});
 
 const startGame = () => {
   gameIsRunning = true;
   gameCountdown();
-	displayCurrentWord();
+  displayCurrentWord();
+	console.log(wordSpansAsArray);
 };
 
 const stopGame = () => {
@@ -117,6 +143,7 @@ const stopGame = () => {
     interface.homescreen,
     interface.countdown,
   ]);
+	interface.word.innerHTML = '';
   console.log('The game is stoped');
 };
 
