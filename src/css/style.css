@@ -78,6 +78,14 @@
 	font-family: var(--monospace-font);
 }
 
+.game__word.game__word--correct {
+	color: var(--correct-color);
+}
+
+.game__word.game__word--wrong {
+	color: var(--wrong-color);
+}
+
 .homescreen {
 	width: 100%;
 	height: 532px;

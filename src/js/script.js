@@ -52,19 +52,23 @@ const toggleHideElements = (elements) => {
   elements.forEach((element) => element.classList.toggle('hidden-display'));
 };
 
-const leftZero = (value) => {
-  return value < 10 ? `0${value}` : value;
-};
+const leftZero = (value) => (value < 10 ? `0${value}` : value);
+
+const getRandomInteger = (min, max) => {
+  return Math.round(Math.random() * (max - min) + min);
+}
 
 const homescreenCountdown = () => {
   let countdownTime = 5;
   const timer = setInterval(() => {
     interface.countdown.textContent = countdownTime;
     --countdownTime;
+
     if (countdownTime === -1) {
       clearInterval(timer);
       toggleHideElements([interface.homescreen]);
       startGame();
+			interface.countdown.textContent = 5;
     }
   }, 1000);
 };
@@ -76,14 +80,34 @@ const gameCountdown = (time = 60) => {
 
     if (time === -1) {
       clearInterval(timer);
-      stopGame();
+      // stopGame();
     }
   }, 1000);
 };
 
+const getRandomWords = () => {
+	const randomWord = words[getRandomInteger(0, words.length)];
+	return randomWord.toLowerCase();
+};
+
+const displayCurrentWord = () => {
+	let randomWord = getRandomWords();
+	let randomWordAsArray = randomWord.split('');
+	randomWordAsArray.forEach(letter => {
+		const letterSpan = document.createElement('span');
+		letterSpan.classList.add('game__word');
+		letterSpan.textContent = letter;
+		interface.word.appendChild(letterSpan);
+	});
+}
+
+
+
+
 const startGame = () => {
   gameIsRunning = true;
   gameCountdown();
+	displayCurrentWord();
 };
 
 const stopGame = () => {

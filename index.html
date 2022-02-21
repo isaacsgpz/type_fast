@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
     />
-    <link rel="shortcut icon" href="src/img/keyboard.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="src/img/keyboard.svg" type="image/x-icon" />
     <title>Type Fast</title>
   </head>
   <body>
@@ -21,38 +21,34 @@
       </header>
       <main class="game-container" data-js="game-container">
         <div class="game__header">
-
           <div class="game__status">
             Pontuação:
             <span class="status__value" data-js="game-score">00</span>
           </div>
-
           <div class="game__status">
             Tempo:
             <span class="status__value" data-js="game-time">60</span>
           </div>
-
         </div>
-
         <div class="game__display">
           <div>Digite a palavra:</div>
-          <div class="game__word" data-js="game-word">
-            paralelepipedo
-          </div>
+          <div class="game__word" data-js="game-word"></div>
         </div>
-
-        <div class="homescreen" data-js="homescreen">
+        <div class="homescreen hidden-display" data-js="homescreen">
           <p class="homescreen__text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, quam, aspernatur facilis repellendus fugiat rerum asperiores facere sequi inventore dolore, quae enim? Eligendi, autem nisi eos reprehenderit voluptatum maxime sit.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit,
+            quam, aspernatur facilis repellendus fugiat rerum asperiores facere
+            sequi inventore dolore, quae enim? Eligendi, autem nisi eos
+            reprehenderit voluptatum maxime sit.
           </p>
-
-          <div class="homescreen__countdown hidden-display" data-js="homescreen-countdown">
-          </div>
+          <div
+            class="homescreen__countdown hidden-display"
+            data-js="homescreen-countdown"
+          ></div>
           <button class="homescreen__btn" data-js="play-btn">
             Jogar
             <i class="uil uil-play"></i>
           </button>
-
         </div>
       </main>
       <footer class="footer">
@@ -68,7 +64,6 @@
         </p>
       </footer>
     </div>
-
     <script src="src/js/script.js"></script>
   </body>
 </html>
