@@ -35,9 +35,9 @@ const interface = {
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 
 let gameScore = 0;
-let gameIsRunning = false;
 let userTypedWord = [];
 let wordSpansAsArray = [];
+let counter = 0;
 
 const words = [
   'Idade',
@@ -63,7 +63,7 @@ const getRandomInteger = (min, max) => {
 };
 
 const homescreenCountdown = () => {
-  let countdownTime = 2;
+  let countdownTime = 5;
   const timer = setInterval(() => {
     interface.countdown.textContent = countdownTime;
     --countdownTime;
@@ -94,12 +94,11 @@ const getRandomWords = () => {
   return randomWord.toLowerCase();
 };
 
-
 const displayCurrentWord = () => {
-	let randomWord = getRandomWords();
+  let randomWord = getRandomWords();
   let randomWordAsArray = randomWord.split('');
 
-	interface.word.innerHTML = '';
+  interface.word.innerHTML = '';
 
   randomWordAsArray.forEach((letter) => {
     const letterSpan = document.createElement('span');
@@ -108,42 +107,67 @@ const displayCurrentWord = () => {
     interface.word.appendChild(letterSpan);
   });
 
-	wordSpansAsArray = document.querySelectorAll('.game__word');
+  wordSpansAsArray = document.querySelectorAll('.game__word');
 };
 
 window.addEventListener('keydown', (event) => {
+  let currentWord = '';
+  wordSpansAsArray.forEach((span) => {
+    currentWord += span.innerText;
+  });
+
   let pressedKey = event.key;
 
   if (letters.includes(pressedKey)) {
-		userTypedWord.push(pressedKey);
+    userTypedWord.push(pressedKey);
 
-    wordSpansAsArray.forEach((spanChar, index) => {
-			const userChar = userTypedWord[index];
+    if (pressedKey === wordSpansAsArray[counter].innerText) {
+      wordSpansAsArray[counter].classList.add('game__word--correct');
+    } else {
+      wordSpansAsArray.forEach((spanChar) => {
+        spanChar.classList.add('game__word--wrong');
+      });
+      setTimeout(() => {
+        interface.word.innerHTML = '';
+        displayCurrentWord();
+        counter = 0;
+				gameScore = 0;
+        return;
+      }, 100);
+    }
 
-			if(userChar === spanChar.innerText) {
-				spanChar.classList.add('game__word--correct');
-			} else {
-				spanChar.classList.add('game__word--wrong');
-			}
-    });
+    if (counter + 1 === currentWord.length) {
+      wordSpansAsArray.forEach((spanChar) => {
+        spanChar.classList.add('game__word--correct');
+      });
+      setTimeout(() => {
+        interface.word.innerHTML = '';
+        displayCurrentWord();
+        counter = 0;
+        gameScore++;
+        interface.score.innerText = leftZero(gameScore);
+        return;
+      }, 100);
+    }
+
+    counter++;
   }
 });
 
 const startGame = () => {
-  gameIsRunning = true;
   gameCountdown();
   displayCurrentWord();
-	console.log(wordSpansAsArray);
 };
 
 const stopGame = () => {
-  gameIsRunning = false;
+  interface.word.innerHTML = '';
+
   toggleHideElements([
     interface.playBtn,
     interface.homescreen,
     interface.countdown,
   ]);
-	interface.word.innerHTML = '';
+
   console.log('The game is stoped');
 };
 
