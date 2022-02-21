@@ -41,8 +41,7 @@
 	height: 100%;
 	display: grid;
 	grid-template-rows: 1fr 3fr 1fr;
-	align-items: center;
-	justify-content: center;
+	place-items: center;
 	margin: 0 auto;
 	padding: 100px 20px;
 }

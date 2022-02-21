@@ -11,6 +11,7 @@
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
     />
+    <link rel="shortcut icon" href="src/img/keyboard.svg" type="image/x-icon">
     <title>Type Fast</title>
   </head>
   <body>
@@ -18,24 +19,24 @@
       <header class="header">
         <h1 class="header__title">Type Fast</h1>
       </header>
-      <main class="game-container">
+      <main class="game-container" data-js="game-container">
         <div class="game__header">
 
           <div class="game__status">
             Pontuação:
-            <span class="status__value">00</span>
+            <span class="status__value" data-js="game-score">00</span>
           </div>
 
           <div class="game__status">
             Tempo:
-            <span class="status__value">00</span>
+            <span class="status__value" data-js="game-time">00</span>
           </div>
 
         </div>
 
         <div class="game__display">
           <div>Digite a palavra:</div>
-          <div class="game__word">
+          <div class="game__word" data-js="game-word">
             paralelepipedo
           </div>
         </div>
