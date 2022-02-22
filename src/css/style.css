@@ -109,12 +109,12 @@
 
 .homescreen__text {
 	margin-bottom: 2rem;
-	font-size: 3rem;
+	font-size: 2.5rem;
 	text-align: center;
 }
 
 .homescreen__btn {
-	font-size: 2.4rem;
+	font-size: 2.5rem;
 	font-family: var(--monospace-font);
 	cursor: pointer;
 }

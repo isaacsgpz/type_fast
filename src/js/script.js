@@ -59,7 +59,7 @@ const toggleHideElements = (elements) => {
 const leftZero = (value) => (value < 10 ? `0${value}` : value);
 
 const getRandomInteger = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 const homescreenCountdown = () => {
@@ -90,7 +90,8 @@ const gameCountdown = (time = 60) => {
 };
 
 const getRandomWords = () => {
-  const randomWord = words[getRandomInteger(0, words.length)];
+	let indexOfAmoutOfWords = words.length - 1;
+  const randomWord = words[getRandomInteger(0, indexOfAmoutOfWords)];
   return randomWord.toLowerCase();
 };
 
@@ -166,8 +167,8 @@ const stopGame = () => {
 
   toggleHideElements([
     interface.playBtn,
-    interface.homescreen,
     interface.countdown,
+    interface.homescreen,
   ]);
 
   console.log('The game is stoped');
