@@ -74,15 +74,19 @@
 .game__word {
 	margin-top: 4rem;
 	font-size: clamp(30px, 8vw, 70px);
-	font-weight: 600;
+	font-weight: 700;
 	font-family: var(--monospace-font);
 }
 
-.game__word.game__word--correct {
+.game__text {
+	margin-bottom: 4rem;
+}
+
+.game__word--correct {
 	color: var(--correct-color);
 }
 
-.game__word.game__word--wrong {
+.game__word--wrong {
 	color: var(--wrong-color);
 }
 
@@ -104,7 +108,8 @@
 }
 
 .homescreen__text {
-	font-size: 2rem;
+	margin-bottom: 2rem;
+	font-size: 3rem;
 	text-align: center;
 }
 

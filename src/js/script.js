@@ -59,7 +59,7 @@ const toggleHideElements = (elements) => {
 const leftZero = (value) => (value < 10 ? `0${value}` : value);
 
 const getRandomInteger = (min, max) => {
-  return Math.round(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 const homescreenCountdown = () => {
@@ -130,10 +130,9 @@ window.addEventListener('keydown', (event) => {
       setTimeout(() => {
         interface.word.innerHTML = '';
         displayCurrentWord();
-        counter = 0;
-				gameScore = 0;
+				counter = 0;
         return;
-      }, 100);
+      }, 200);
     }
 
     if (counter + 1 === currentWord.length) {
@@ -155,8 +154,11 @@ window.addEventListener('keydown', (event) => {
 });
 
 const startGame = () => {
+	counter = 0;
+	gameScore = 0;
   gameCountdown();
   displayCurrentWord();
+	console.log('The game is started');
 };
 
 const stopGame = () => {
