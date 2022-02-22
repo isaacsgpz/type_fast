@@ -4,6 +4,13 @@
 	background-color: var(--background-color);
 }
 
+.container {
+	width: 100%;
+	max-width: 900px;
+	position: relative;
+	margin: 0 auto;
+}
+
 .header,
 .footer {
 	width: 100%;
@@ -25,6 +32,19 @@
 	text-decoration: underline;
 }
 
+.header__btn {
+	position: absolute;
+	inset: 0 0 0 auto;
+}
+
+.icon-btn {
+	color: var(--color-b);
+	font-size: 2.5rem;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
 .footer {
 	inset: auto 0 20px 0;
 }
@@ -36,8 +56,6 @@
 
 /* GAME */
 .game-container {
-	width: 100%;
-	max-width: 900px;
 	height: 100%;
 	display: grid;
 	grid-template-rows: 1fr 3fr 1fr;
@@ -51,9 +69,9 @@
 	width: 100%;
 	display: inline-flex;
 	flex-wrap: wrap;
-	gap: 1rem;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
 }
 
 .game__status {

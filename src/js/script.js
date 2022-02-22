@@ -52,6 +52,21 @@ const words = [
   'Banana',
 ];
 
+const audioIsEnable = true;
+
+const soundEffects = {
+	correct: 'src/audio/correct.mp3',
+	wrong: 'src/audio/wrong.mp3',
+	keywdown: 'src/audio/keydown.mp3',
+};
+
+const playSoundEffect = (url) => {
+	const audio = new Audio(url);
+	if(audioIsEnable) {
+		audio.play();
+	}
+};
+
 const toggleHideElements = (elements) => {
   elements.forEach((element) => element.classList.toggle('hidden-display'));
 };
@@ -72,7 +87,7 @@ const homescreenCountdown = () => {
       clearInterval(timer);
       toggleHideElements([interface.homescreen]);
       startGame();
-      interface.countdown.textContent = 5;
+      interface.countdown.textContent = 3;
     }
   }, 1000);
 };
@@ -96,6 +111,7 @@ const getRandomWords = () => {
 };
 
 const displayCurrentWord = () => {
+	interface.word.innerHTML = '';
   let randomWord = getRandomWords();
   let randomWordAsArray = randomWord.split('');
 
@@ -112,42 +128,48 @@ const displayCurrentWord = () => {
 };
 
 window.addEventListener('keydown', (event) => {
-  let currentWord = '';
+	
+	let currentWord = '';
   wordSpansAsArray.forEach((span) => {
-    currentWord += span.innerText;
+		currentWord += span.innerText;
   });
-
+	
   let pressedKey = event.key;
-
+	
   if (letters.includes(pressedKey)) {
+		playSoundEffect(soundEffects.keywdown);
     userTypedWord.push(pressedKey);
 
     if (pressedKey === wordSpansAsArray[counter].innerText) {
       wordSpansAsArray[counter].classList.add('game__word--correct');
     } else {
+			playSoundEffect(soundEffects.wrong);
+
       wordSpansAsArray.forEach((spanChar) => {
         spanChar.classList.add('game__word--wrong');
       });
+
       setTimeout(() => {
-        interface.word.innerHTML = '';
         displayCurrentWord();
 				counter = 0;
         return;
-      }, 200);
+      }, 260);
     }
 
     if (counter + 1 === currentWord.length) {
+			playSoundEffect(soundEffects.correct);
+
       wordSpansAsArray.forEach((spanChar) => {
         spanChar.classList.add('game__word--correct');
       });
+
       setTimeout(() => {
-        interface.word.innerHTML = '';
         displayCurrentWord();
         counter = 0;
         gameScore++;
         interface.score.innerText = leftZero(gameScore);
         return;
-      }, 100);
+      }, 260);
     }
 
     counter++;
