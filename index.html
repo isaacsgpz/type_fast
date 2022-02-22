@@ -53,7 +53,7 @@
             class="homescreen__countdown hidden-display"
             data-js="homescreen-countdown"
           ></div>
-          <button class="homescreen__btn" data-js="play-btn">
+          <button class="box-btn" data-js="play-btn">
             Jogar
             <i class="uil uil-play"></i>
           </button>
@@ -72,6 +72,37 @@
         </p>
       </footer>
     </div>
+
+    <div class="modal hidden-display" data-js="settings-modal">
+      <div class="modal__container">
+        <h3 class="modal__title">Configurações</h3>
+
+        <div>
+          <label for="">Tempo de jogo:</label>
+          <input type="number" name="" id="" value="60" data-js="game-time-input">
+        </div>
+
+        <div>
+          <label for="">Tamanho das palavras:</label>
+          <input type="number" name="" id="" value="60" data-js="words-size-input">
+        </div>
+
+        <div>
+          <label for="">Som:</label>
+
+          <select name="" id="" data-js="enable-sounds-input">
+            <option value="">Ligado</option>
+            <option value="">Desligado</option>
+          </select>
+
+        </div>
+
+        <button class="box-btn" data-js="save-settings-btn">
+          Salvar
+        </button>
+      </div>
+    </div>
+
     <script src="src/js/script.js"></script>
   </body>
 </html>

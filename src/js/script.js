@@ -24,6 +24,9 @@ copyrightYear.textContent = updateCurrentYear();
 
 // GAME ========================================================================
 const interface = {
+	openSettingsBtn: document.querySelector('[data-js="settings-btn"]'),
+	saveSettingsBtn: document.querySelector('[data-js="save-settings-btn"]'),
+	settingsModal: document.querySelector('[data-js="settings-modal"]'),
   countdown: document.querySelector('[data-js="homescreen-countdown"]'),
   homescreen: document.querySelector('[data-js="homescreen"]'),
   playBtn: document.querySelector('[data-js="play-btn"]'),
@@ -32,12 +35,14 @@ const interface = {
   word: document.querySelector('[data-js="game-word"]'),
 };
 
-const letters = 'abcdefghijklmnopqrstuvwxyz';
+const audioIsEnable = true;
 
 let gameScore = 0;
 let userTypedWord = [];
 let wordSpansAsArray = [];
 let counter = 0;
+
+const letters = 'abcdefghijklmnopqrstuvwxyz';
 
 const words = [
   'Idade',
@@ -52,13 +57,15 @@ const words = [
   'Banana',
 ];
 
-const audioIsEnable = true;
-
 const soundEffects = {
 	correct: 'src/audio/correct.mp3',
 	wrong: 'src/audio/wrong.mp3',
 	keywdown: 'src/audio/keydown.mp3',
 };
+
+const updateGameSettings = () => {
+	console.log('oi');
+}
 
 const playSoundEffect = (url) => {
 	const audio = new Audio(url);
@@ -201,4 +208,11 @@ interface.playBtn.addEventListener('click', () => {
   homescreenCountdown();
 });
 
+interface.saveSettingsBtn.addEventListener('click', () => {
+	toggleHideElements([interface.settingsModal]);
+	updateGameSettings();
+})
 
+interface.openSettingsBtn.addEventListener('click', () => {
+	toggleHideElements([interface.settingsModal]);
+})

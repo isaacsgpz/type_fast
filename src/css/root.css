@@ -8,14 +8,15 @@
 	--color-a: #848478;
 	--color-b: #aaaa91;
 	--main-color: #00b0db;
-
+	--modal-bg: rgba(0, 0, 0, 0.3);
 	--correct-color: #2ecc71;
 	--wrong-color: #d63e2d;
+
+	--main-border-radius: 5px;
 
 	--monospace-font: 'Fira Code', monospace;
 	--sansserif-font: 'Roboto', sans-serif;
 }
-
 
 html {
   font-size: 62.5%;
