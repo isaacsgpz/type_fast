@@ -63,7 +63,7 @@ const getRandomInteger = (min, max) => {
 };
 
 const homescreenCountdown = () => {
-  let countdownTime = 5;
+  let countdownTime = 3;
   const timer = setInterval(() => {
     interface.countdown.textContent = countdownTime;
     --countdownTime;
@@ -178,3 +178,5 @@ interface.playBtn.addEventListener('click', () => {
   toggleHideElements([interface.playBtn, interface.countdown]);
   homescreenCountdown();
 });
+
+
