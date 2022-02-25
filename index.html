@@ -19,8 +19,8 @@
       <header class="header">
         <div class="container">
           <h1 class="header__title">Type Fast</h1>
-          <button class="header__btn icon-btn" data-js="settings-btn">
-            <i class="uil uil-setting"></i>
+          <button class="header__btn icon-btn" data-js="audio-btn">
+            <i class="uil uil-volume-mute"></i>
           </button>
         </div>
       </header>
@@ -49,6 +49,10 @@
               Quantas palavras você consegue digitar em 60 segundos?
             </p>
           </div>
+            <p class="homescreen__text">
+              Maior Pontuação: 
+              <span class="status__value" data-js="high-score">00</span>
+            </p>
           <div
             class="homescreen__countdown hidden-display"
             data-js="homescreen-countdown"
@@ -72,37 +76,6 @@
         </p>
       </footer>
     </div>
-
-    <div class="modal hidden-display" data-js="settings-modal">
-      <div class="modal__container">
-        <h3 class="modal__title">Configurações</h3>
-
-        <div>
-          <label for="">Tempo de jogo:</label>
-          <input type="number" name="" id="" value="60" data-js="game-time-input">
-        </div>
-
-        <div>
-          <label for="">Tamanho das palavras:</label>
-          <input type="number" name="" id="" value="60" data-js="words-size-input">
-        </div>
-
-        <div>
-          <label for="">Som:</label>
-
-          <select name="" id="" data-js="enable-sounds-input">
-            <option value="">Ligado</option>
-            <option value="">Desligado</option>
-          </select>
-
-        </div>
-
-        <button class="box-btn" data-js="save-settings-btn">
-          Salvar
-        </button>
-      </div>
-    </div>
-
     <script src="src/js/script.js"></script>
   </body>
 </html>

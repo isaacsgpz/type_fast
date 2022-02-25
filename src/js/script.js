@@ -24,26 +24,26 @@ copyrightYear.textContent = updateCurrentYear();
 
 // GAME ========================================================================
 const interface = {
-	openSettingsBtn: document.querySelector('[data-js="settings-btn"]'),
-	saveSettingsBtn: document.querySelector('[data-js="save-settings-btn"]'),
-	settingsModal: document.querySelector('[data-js="settings-modal"]'),
   countdown: document.querySelector('[data-js="homescreen-countdown"]'),
   homescreen: document.querySelector('[data-js="homescreen"]'),
   playBtn: document.querySelector('[data-js="play-btn"]'),
   score: document.querySelector('[data-js="game-score"]'),
+	highScore: document.querySelector('[data-js="high-score"]'),
   time: document.querySelector('[data-js="game-time"]'),
   word: document.querySelector('[data-js="game-word"]'),
 };
 
-const audioIsEnable = true;
+const settings = {
+  audio: document.querySelector('[data-js="enable-audio-input"]'),
+};
 
-let gameScore = 0;
-let userTypedWord = [];
-let wordSpansAsArray = [];
-let counter = 0;
+const soundEffects = {
+  correct: 'src/audio/correct.mp3',
+  wrong: 'src/audio/wrong.mp3',
+  keywdown: 'src/audio/keydown.mp3',
+};
 
 const letters = 'abcdefghijklmnopqrstuvwxyz';
-
 const words = [
   'Idade',
   'Aposentado',
@@ -57,21 +57,19 @@ const words = [
   'Banana',
 ];
 
-const soundEffects = {
-	correct: 'src/audio/correct.mp3',
-	wrong: 'src/audio/wrong.mp3',
-	keywdown: 'src/audio/keydown.mp3',
-};
+let userTypedWord = [];
+let wordSpansAsArray = [];
+let counter = 0;
+let gameScore = 0;
+// let highScore;
 
-const updateGameSettings = () => {
-	console.log('oi');
-}
+// const audioIsEnable = getItemOfLocalStorage('audio');
 
 const playSoundEffect = (url) => {
-	const audio = new Audio(url);
-	if(audioIsEnable) {
-		audio.play();
-	}
+  const audio = new Audio(url);
+  if (audioIsEnable) {
+    audio.play();
+  }
 };
 
 const toggleHideElements = (elements) => {
@@ -94,7 +92,7 @@ const homescreenCountdown = () => {
       clearInterval(timer);
       toggleHideElements([interface.homescreen]);
       startGame();
-      interface.countdown.textContent = 3;
+      interface.countdown.textContent = '';
     }
   }, 1000);
 };
@@ -112,13 +110,13 @@ const gameCountdown = (time = 60) => {
 };
 
 const getRandomWords = () => {
-	let indexOfAmoutOfWords = words.length - 1;
+  let indexOfAmoutOfWords = words.length - 1;
   const randomWord = words[getRandomInteger(0, indexOfAmoutOfWords)];
   return randomWord.toLowerCase();
 };
 
 const displayCurrentWord = () => {
-	interface.word.innerHTML = '';
+  interface.word.innerHTML = '';
   let randomWord = getRandomWords();
   let randomWordAsArray = randomWord.split('');
 
@@ -135,22 +133,21 @@ const displayCurrentWord = () => {
 };
 
 window.addEventListener('keydown', (event) => {
-	
-	let currentWord = '';
+  let currentWord = '';
   wordSpansAsArray.forEach((span) => {
-		currentWord += span.innerText;
+    currentWord += span.innerText;
   });
-	
+
   let pressedKey = event.key;
-	
+
   if (letters.includes(pressedKey)) {
-		playSoundEffect(soundEffects.keywdown);
+    playSoundEffect(soundEffects.keywdown);
     userTypedWord.push(pressedKey);
 
     if (pressedKey === wordSpansAsArray[counter].innerText) {
       wordSpansAsArray[counter].classList.add('game__word--correct');
     } else {
-			playSoundEffect(soundEffects.wrong);
+      playSoundEffect(soundEffects.wrong);
 
       wordSpansAsArray.forEach((spanChar) => {
         spanChar.classList.add('game__word--wrong');
@@ -158,13 +155,14 @@ window.addEventListener('keydown', (event) => {
 
       setTimeout(() => {
         displayCurrentWord();
-				counter = 0;
+
+        counter = 0;
         return;
       }, 260);
     }
 
     if (counter + 1 === currentWord.length) {
-			playSoundEffect(soundEffects.correct);
+      playSoundEffect(soundEffects.correct);
 
       wordSpansAsArray.forEach((spanChar) => {
         spanChar.classList.add('game__word--correct');
@@ -172,11 +170,12 @@ window.addEventListener('keydown', (event) => {
 
       setTimeout(() => {
         displayCurrentWord();
+
         counter = 0;
         gameScore++;
         interface.score.innerText = leftZero(gameScore);
         return;
-      }, 260);
+      }, 300);
     }
 
     counter++;
@@ -184,11 +183,11 @@ window.addEventListener('keydown', (event) => {
 });
 
 const startGame = () => {
-	counter = 0;
-	gameScore = 0;
+  counter = 0;
+  gameScore = 0;
   gameCountdown();
   displayCurrentWord();
-	console.log('The game is started');
+  console.log('The game is started');
 };
 
 const stopGame = () => {
@@ -208,11 +207,4 @@ interface.playBtn.addEventListener('click', () => {
   homescreenCountdown();
 });
 
-interface.saveSettingsBtn.addEventListener('click', () => {
-	toggleHideElements([interface.settingsModal]);
-	updateGameSettings();
-})
 
-interface.openSettingsBtn.addEventListener('click', () => {
-	toggleHideElements([interface.settingsModal]);
-})
