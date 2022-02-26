@@ -6,6 +6,11 @@ const getItemOfLocalStorage = (key) => {
   if (key) return localStorage.getItem(key);
 };
 
+const removeItemOfLocalStorage = (key) => {
+  if (key) localStorage.removeItem(key);
+  return;
+};
+
 const copyrightYear = document.querySelector('[data-js="copyright-year"]');
 
 const updateCurrentYear = () => {
@@ -65,10 +70,11 @@ let audioIsEnable = getItemOfLocalStorage('audio');
 
 if(!audioIsEnable) {
   setItemOnLocalStorage('audio', 'true');
+  interface.audioIcon.classList = 'uil uil-volume-mute';
 }
 
 const toggleAudio = () => {
-  if (audioIsEnable === 'true') {
+  if (getItemOfLocalStorage('audio') === 'true') {
     setItemOnLocalStorage('audio', 'false');
     interface.audioIcon.classList = 'uil uil-volume-up';
   } else {
@@ -79,8 +85,10 @@ const toggleAudio = () => {
 
 const playSoundEffect = (url) => {
   const audio = new Audio(url);
-  if (audioIsEnable === 'true') {
+  if (getItemOfLocalStorage('audio') === 'true') {
     audio.play();
+  } else {
+    audio.pause();
   }
 };
 
