@@ -12,7 +12,7 @@ const updateCurrentYear = () => {
   const currentYear = new Date().getFullYear();
   const yearLocalStorage = getItemOfLocalStorage('year');
 
-  if (yearLocalStorage && yearLocalStorage === currentYear) {
+  if (yearLocalStorage === currentYear) {
     return yearLocalStorage;
   } else {
     setItemOnLocalStorage('year', currentYear);
@@ -24,6 +24,8 @@ copyrightYear.textContent = updateCurrentYear();
 
 // GAME ========================================================================
 const interface = {
+  audioBtn: document.querySelector('[data-js="audio-btn"]'),
+  audioIcon: document.querySelector('[data-js="audio-icon"'),
   countdown: document.querySelector('[data-js="homescreen-countdown"]'),
   homescreen: document.querySelector('[data-js="homescreen"]'),
   playBtn: document.querySelector('[data-js="play-btn"]'),
@@ -31,10 +33,6 @@ const interface = {
 	highScore: document.querySelector('[data-js="high-score"]'),
   time: document.querySelector('[data-js="game-time"]'),
   word: document.querySelector('[data-js="game-word"]'),
-};
-
-const settings = {
-  audio: document.querySelector('[data-js="enable-audio-input"]'),
 };
 
 const soundEffects = {
@@ -63,11 +61,25 @@ let counter = 0;
 let gameScore = 0;
 // let highScore;
 
-// const audioIsEnable = getItemOfLocalStorage('audio');
+let audioIsEnable = getItemOfLocalStorage('audio');
+
+if(!audioIsEnable) {
+  setItemOnLocalStorage('audio', 'true');
+}
+
+const toggleAudio = () => {
+  if (audioIsEnable === 'true') {
+    setItemOnLocalStorage('audio', 'false');
+    interface.audioIcon.classList = 'uil uil-volume-up';
+  } else {
+    setItemOnLocalStorage('audio', 'true');
+    interface.audioIcon.classList = 'uil uil-volume-mute';
+  }
+}
 
 const playSoundEffect = (url) => {
   const audio = new Audio(url);
-  if (audioIsEnable) {
+  if (audioIsEnable === 'true') {
     audio.play();
   }
 };
@@ -207,4 +219,4 @@ interface.playBtn.addEventListener('click', () => {
   homescreenCountdown();
 });
 
-
+interface.audioBtn.addEventListener('click', toggleAudio);
