@@ -64,9 +64,10 @@ let userTypedWord = [];
 let wordSpansAsArray = [];
 let counter = 0;
 let gameScore = 0;
-// let highScore;
+// let highScore = 
 
 let audioIsEnable = getItemOfLocalStorage('audio');
+
 
 if(!audioIsEnable) {
   setItemOnLocalStorage('audio', 'true');
