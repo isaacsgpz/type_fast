@@ -35,7 +35,7 @@ const interface = {
   homescreen: document.querySelector('[data-js="homescreen"]'),
   playBtn: document.querySelector('[data-js="play-btn"]'),
   score: document.querySelector('[data-js="game-score"]'),
-	highScore: document.querySelector('[data-js="high-score"]'),
+  highScore: document.querySelector('[data-js="high-score"]'),
   time: document.querySelector('[data-js="game-time"]'),
   word: document.querySelector('[data-js="game-word"]'),
 };
@@ -64,12 +64,11 @@ let userTypedWord = [];
 let wordSpansAsArray = [];
 let counter = 0;
 let gameScore = 0;
-// let highScore = 
+let highScore = getItemOfLocalStorage('highscore');
 
 let audioIsEnable = getItemOfLocalStorage('audio');
 
-
-if(!audioIsEnable) {
+if (!audioIsEnable) {
   setItemOnLocalStorage('audio', 'true');
   interface.audioIcon.classList = 'uil uil-volume-mute';
 }
@@ -82,7 +81,7 @@ const toggleAudio = () => {
     setItemOnLocalStorage('audio', 'true');
     interface.audioIcon.classList = 'uil uil-volume-mute';
   }
-}
+};
 
 const playSoundEffect = (url) => {
   const audio = new Audio(url);
@@ -90,6 +89,22 @@ const playSoundEffect = (url) => {
     audio.play();
   } else {
     audio.pause();
+  }
+};
+
+const updateScores = (gameScore) => {
+  interface.score.innerText = leftZero(gameScore);
+
+  if (highScore) {
+    if (gameScore > highScore) {
+      setItemOnLocalStorage('highscore', leftZero(gameScore));
+    }
+
+    interface.highScore.textContent = getItemOfLocalStorage('highscore');
+  } else {
+    setItemOnLocalStorage('highscore', leftZero(gameScore));
+
+    interface.highScore.textContent = '00';
   }
 };
 
@@ -194,7 +209,7 @@ window.addEventListener('keydown', (event) => {
 
         counter = 0;
         gameScore++;
-        interface.score.innerText = leftZero(gameScore);
+        updateScores(gameScore);
         return;
       }, 300);
     }
@@ -206,13 +221,16 @@ window.addEventListener('keydown', (event) => {
 const startGame = () => {
   counter = 0;
   gameScore = 0;
+
   gameCountdown();
   displayCurrentWord();
+
   console.log('The game is started');
 };
 
 const stopGame = () => {
   interface.word.innerHTML = '';
+  interface.highScore.textContent = getItemOfLocalStorage('highscore');
 
   toggleHideElements([
     interface.playBtn,
@@ -229,3 +247,5 @@ interface.playBtn.addEventListener('click', () => {
 });
 
 interface.audioBtn.addEventListener('click', toggleAudio);
+
+updateScores();
