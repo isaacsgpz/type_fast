@@ -10,10 +10,7 @@
 
 ## 🤔 About
 
-**TypeFast** is a simple typing game. The objective is to correctly type each word that appears on the screen as quickly as possible before the 60 second time runs out.
-
-<br>
-
+**TypeFast** is a simple typing game. The objective is to correctly type each word that appears on the screen as quickly as possible before the 60 second time runs out.  
 To play, just access the link: [Play TypeFast](https://eoisaac.github.io/Type_Fast/)
 
 
