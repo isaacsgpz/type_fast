@@ -39,7 +39,8 @@ This project was made using the following technologies:
 
 ## 📝 License
 
-This project has a license, you can access the file to see more details [![MIT License badge](https://img.shields.io/github/license/eoisaac/Type_Fast?style=flat-square)](LICENSE.md)
+This project has a license, you can access the file to see more details    
+[![MIT License badge](https://img.shields.io/github/license/eoisaac/Type_Fast?color=green&style=flat-square)](LICENSE.md)
 
 ---
 
