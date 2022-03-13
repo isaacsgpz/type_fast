@@ -93,18 +93,18 @@ const playSoundEffect = (url) => {
 };
 
 const updateScores = (gameScore) => {
-  interface.score.innerText = leftZero(gameScore);
-
+  
   if (highScore) {
     if (gameScore > highScore) {
+      interface.score.innerText = leftZero(gameScore);
       setItemOnLocalStorage('highscore', leftZero(gameScore));
     }
 
     interface.highScore.textContent = getItemOfLocalStorage('highscore');
   } else {
-    setItemOnLocalStorage('highscore', leftZero(gameScore));
-
+    setItemOnLocalStorage('highscore', leftZero(0));
     interface.highScore.textContent = '00';
+    interface.score.innerText = leftZero(0);
   }
 };
 
